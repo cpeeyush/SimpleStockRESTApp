@@ -41,7 +41,7 @@ public class StockServiceImpl implements StockService {
   @Override
   public ResponseEntity<Stock> createNewStock(Stock stock, HttpServletRequest request) {
 
-    if(null != stock.getId() && StringUtils.isBlank(stock.getName()) && null != stock.getPrice()) {
+    if(null != stock.getId() && !StringUtils.isBlank(stock.getName()) && null != stock.getPrice()) {
       Stock newStock = stockRepository.save(stock);
       HttpHeaders responseHeaders = new HttpHeaders();
       responseHeaders.set("Location", stockUrlHelper(newStock, request));
