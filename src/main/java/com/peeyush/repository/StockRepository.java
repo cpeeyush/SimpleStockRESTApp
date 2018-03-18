@@ -2,10 +2,12 @@ package com.peeyush.repository;
 
 import com.peeyush.model.Stock;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  * This interface defines all common operations for StockRepositories.
  */
+@Repository
 public interface StockRepository {
 
   /**
