@@ -4,7 +4,7 @@ package com.peeyush;
  * Hello world!
  *
  */
-public class App 
+public class StockRestApp
 {
     public static void main( String[] args )
     {
