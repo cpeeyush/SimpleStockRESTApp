@@ -1,15 +1,15 @@
-package com.peeyush.helper;
+package com.peeyush.utils;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
 /**
- * This class is helper class.
+ * This class is utility class.
  * It is a very very simple dumb Numeric Long Number Generator, Just for demo purpose.
  * @link https://gist.github.com/umbertogriffo/956f3dacc7fbeee0b65a264e8b003044
  */
-public class SimpleInMemoryNumericIdGenerator {
+final public class SimpleInMemoryNumericIdGenerator {
 
   public static Long generateUniqueId() {
     long val = -1;

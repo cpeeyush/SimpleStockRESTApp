@@ -1,13 +1,13 @@
-package com.peeyush.repository;
+package com.peeyush.repositories;
 
-import com.peeyush.model.Stock;
+import com.peeyush.models.Stock;
 import java.util.List;
-import org.springframework.stereotype.Repository;
+
 
 /**
  * This interface defines all common operations for StockRepositories.
  */
-@Repository
+
 public interface StockRepository {
 
   /**
@@ -23,6 +23,13 @@ public interface StockRepository {
    * @return Stock Object.
    */
   public Stock fetchOne(Long id);
+
+  /**
+   * Fetch a stock by it's name.
+   * @param name
+   * @return Stock Object.
+   */
+  public Stock fetchOneByName(String name);
 
   /**
    * @return List of All Stocks from Data Store.

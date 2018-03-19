@@ -1,6 +1,6 @@
 package com.peeyush.service;
 
-import com.peeyush.model.Stock;
+import com.peeyush.models.Stock;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
@@ -12,31 +12,30 @@ public interface StockService {
 
   /**
    * Get All the Stock.
-   * @return Response Entity of java.util.List of Stock.
+   * @return List of Stock.
    */
-  public ResponseEntity<List<Stock>> getAllStocksResponse();
+  public List<Stock> getAllStocks();
 
   /**
    * Get a Single Stock by Id.
    * @param id
-   * @return Response Entity of Stock.
+   * @return Stock Entity.
    */
-   public ResponseEntity<Stock> getSingleStockResponse(Long id);
+   public Stock getSingleStock(Long id);
 
   /**
    * Create a new stock record.
    * @param stock
-   * @param request
-   * @return Response Entity of Created Stock.
+   * @return Created Stock Entity
    */
-   public ResponseEntity<Stock> createNewStock(Stock stock, HttpServletRequest request);
+   public Stock createNewStock(Stock stock);
 
   /**
    * Update an existing stock record.
    * @param id
    * @param stockUpdates
-   * @return Response Entity of Updated Stock.
+   * @return Updated Stock Entity
    */
-   public ResponseEntity<Stock> putUpdateStock(Long id, Stock stockUpdates);
+   public Stock putUpdateStock(Long id, Stock stockUpdates);
 
 }

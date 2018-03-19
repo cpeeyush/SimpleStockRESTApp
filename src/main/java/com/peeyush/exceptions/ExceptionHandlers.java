@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * This class is works with controller and handle all possible type of exceptions and Generate meaningful error
+ * This class is works with controllers and handle all possible type of exceptions and Generate meaningful error
  * response for the user.
  *
  * NOTICE: All Methods are self explanatory. No Documentation required.
@@ -25,7 +25,7 @@ public class ExceptionHandlers {
   @ResponseStatus(HttpStatus.NOT_FOUND)
   @ResponseBody
   public ErrorResponse handleStockNotFoundException(final StockNotFoundException ex) {
-    log.error("Stock not found thrown");
+    log.warn("Stock not found thrown");
     return new ErrorResponse("STOCK_NOT_FOUND", ex.getMessage());
   }
 
@@ -33,12 +33,21 @@ public class ExceptionHandlers {
   @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
   @ResponseBody
   public ErrorResponse handleStockMissingInformationException(final StockMissingInformationException ex) {
-    log.error("Stock missing information thrown");
+    log.warn("Stock missing information thrown");
     return new ErrorResponse("STOCK_MISSING_INFORMATION", ex.getMessage());
+  }
+
+  @ExceptionHandler(StockAlreadyExistsException.class)
+  @ResponseStatus(HttpStatus.CONFLICT)
+  @ResponseBody
+  public ErrorResponse handleStockAlreadyExistsException(final StockAlreadyExistsException ex) {
+    log.warn("Stock already exists thrown");
+    return new ErrorResponse("STOCK_ALREADY_EXISTS", ex.getMessage());
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ResponseBody
   public ErrorResponse handleBadRequestException(MethodArgumentNotValidException exception) {
 
     String errorMsg = exception.getBindingResult().getFieldErrors().stream()
