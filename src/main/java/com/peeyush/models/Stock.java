@@ -16,15 +16,13 @@ public class Stock {
   private Money money;
   private LocalDateTime lastUpdate;
 
-  public Stock(Long id,String name,Money money,LocalDateTime lastUpdate){
+  public Stock(Long id,String name,Money money){
     Assert.notNull(id, "Id must not be null");
     Assert.notNull(name, "Name must not be null");
     Assert.notNull(money, "Money must not be null");
-    Assert.notNull(lastUpdate, "lastUpdate must not be null");
     this.id           = id;
     this.name         = StringUtils.trim(name);
     this.money        = money;
-    this.lastUpdate   = lastUpdate;
   }
 
   public Long getId() {
@@ -46,4 +44,7 @@ public class Stock {
     return lastUpdate;
   }
 
+  public void setLastUpdate(LocalDateTime lastUpdate) {
+    this.lastUpdate = lastUpdate;
+  }
 }

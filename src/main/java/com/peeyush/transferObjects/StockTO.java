@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.peeyush.models.Stock;
 import java.time.LocalDateTime;
+import org.springframework.util.Assert;
 
 @JsonInclude(Include.NON_NULL)
 public class StockTO {
@@ -16,6 +17,7 @@ public class StockTO {
   public StockTO(){}
 
   public StockTO(Stock stock){
+      Assert.notNull(stock ,"Stock should not be null");
       this.id           = stock.getId();
       this.name         = stock.getName();
       this.currentPrice = stock.getMoney().getCurrencyUnit() + " " +stock.getMoney().getAmount();

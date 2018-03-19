@@ -41,13 +41,10 @@ public class StockController {
       return stockApplication.createNewStock(createNewStockRequest, req);
     }
 
-    // Update Contact with PUT
+    // Update A Stock with PUT
     @RequestMapping(value = "stocks/{id}", method = RequestMethod.PUT)
     public ResponseEntity<StockTO> putUpdateStock(@PathVariable Long id, @Valid @RequestBody UpdateStockRequest updateStockRequest) {
-      Money money = Money.parse(updateStockRequest.getCurrentPrice());
-      //Stock stock = new Stock(updateStockRequest.getId(),);
-      //return contactService.putUpdateContact(id, contact);
-      return null;
+      return stockApplication.putUpdateStock(id,updateStockRequest);
     }
 
 
