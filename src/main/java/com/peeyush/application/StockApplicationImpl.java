@@ -6,7 +6,6 @@ import com.peeyush.requests.UpdateStockRequest;
 import com.peeyush.service.StockService;
 import com.peeyush.transferObjects.StockTO;
 import com.peeyush.utils.SimpleInMemoryNumericIdGenerator;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StockStockApplicationImpl implements StockApplication {
+public class StockApplicationImpl implements StockApplication {
 
   @Autowired
   private StockService stockService;
