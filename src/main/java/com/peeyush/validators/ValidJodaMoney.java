@@ -10,6 +10,7 @@ import javax.validation.Payload;
 
 /**
  * Custom Annotation for Validating the API input for a valid Joda Money.
+ * Uses com.peeyush.validators.MoneyValidator for validation.
  */
 @Target({ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)

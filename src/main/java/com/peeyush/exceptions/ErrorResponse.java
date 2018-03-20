@@ -1,5 +1,9 @@
 package com.peeyush.exceptions;
 
+/**
+ * Api ErrorResponse Class.
+ * To return errors in the user friendly manner.
+ */
 public class ErrorResponse {
 
   private String code;
