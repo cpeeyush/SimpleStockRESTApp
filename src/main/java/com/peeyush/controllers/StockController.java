@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Stock Application main controller. Mapped to "api/" path.
+ * Stock Application APIs main controller.
  */
 @RestController
 @RequestMapping("api/")

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,6 +27,7 @@ public class Stock {
   @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
   @GenericGenerator(name = "native", strategy = "native")
   private Long id;
+  @Size(min = 2, max = 20)
   private String name;
   @Columns(columns = { @Column(name = "currency"), @Column(name = "amount") })
   @Type(type = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyAmountAndCurrency")

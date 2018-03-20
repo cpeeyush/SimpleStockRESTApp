@@ -1,5 +1,7 @@
 package com.peeyush.exceptions;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -56,6 +58,23 @@ public class ExceptionHandlers {
         .orElse(exception.getMessage());
 
     return new ErrorResponse("BAD_REQUEST",errorMsg);
+  }
+
+  @ExceptionHandler(ConstraintViolationException.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ResponseBody
+  public ErrorResponse handleConstraintViolationException(ConstraintViolationException exception) {
+
+    StringBuilder errorMessage = new StringBuilder();
+
+    for(ConstraintViolation violation : exception.getConstraintViolations()){
+      errorMessage.append(violation.getPropertyPath().toString());
+      errorMessage.append(":");
+      errorMessage.append(violation.getMessage());
+      errorMessage.append(System.lineSeparator());
+    }
+
+    return new ErrorResponse("BAD_REQUEST",errorMessage.toString());
   }
 
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
