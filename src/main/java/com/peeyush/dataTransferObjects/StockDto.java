@@ -1,22 +1,25 @@
-package com.peeyush.transferObjects;
+package com.peeyush.dataTransferObjects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.peeyush.models.Stock;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import org.springframework.util.Assert;
 
 @JsonInclude(Include.NON_NULL)
-public class StockTO {
+public class StockDto implements Serializable{
 
+  private static final long serialVersionUID = -4381065734779014094L;
+  
   private Long id;
   private String name;
   private String currentPrice;
   private LocalDateTime lastUpdate;
 
-  public StockTO(){}
+  public StockDto(){}
 
-  public StockTO(Stock stock){
+  public StockDto(Stock stock){
       Assert.notNull(stock ,"Stock should not be null");
       this.id           = stock.getId();
       this.name         = stock.getName();
