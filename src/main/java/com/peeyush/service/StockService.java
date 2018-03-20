@@ -31,7 +31,7 @@ public interface StockService {
    public Stock createNewStock(Stock stock);
 
   /**
-   * Update an existing stock record.
+   * Update an existing stock record.(Only Price)
    * @param id
    * @param stockUpdates
    * @return Updated Stock Entity

@@ -7,6 +7,10 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import org.springframework.util.Assert;
 
+/**
+ * It is the Data transfer Object for Stock Entity. As it only exposes required properties
+ * that's why it's safe to use while transferring data on wire.
+ */
 @JsonInclude(Include.NON_NULL)
 public class StockDto implements Serializable{
 

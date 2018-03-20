@@ -15,6 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+/**
+ * Implementation of StockApplication interface. See baseclass for more information.
+ */
 @Component
 public class StockApplicationImpl implements StockApplication {
 

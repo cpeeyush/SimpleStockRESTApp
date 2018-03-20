@@ -8,6 +8,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 
+/**
+ * Main purpose of this class is to abstract the ResponseEntity creation for various use cases.
+ * It provides all the methods which returns ResponseEntity and could be used by spring controller directly.
+ * Methods are self explanatory.
+ */
 public interface StockApplication {
 
   public ResponseEntity<List<StockDto>> getAllStocksResponse();

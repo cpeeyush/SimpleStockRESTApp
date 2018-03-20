@@ -19,7 +19,7 @@ public class MoneyValidator implements ConstraintValidator<ValidJodaMoney, Strin
       if (null != money) {
         return true;
       }
-    } catch (IllegalArgumentException e) {
+    } catch (Exception e) {
       return false;
     }
     return false;

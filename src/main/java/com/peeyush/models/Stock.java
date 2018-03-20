@@ -39,7 +39,7 @@ public class Stock {
   public Stock(String name,Money money){
     Assert.notNull(name, "Name must not be null");
     Assert.notNull(money, "Money must not be null");
-    this.name         = StringUtils.trim(name);
+    this.name         = StringUtils.trim(name).toUpperCase();
     this.money        = money;
   }
 
@@ -64,14 +64,12 @@ public class Stock {
   }
 
   public LocalDateTime getCreated() {
+
     return created;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
   public void setMoney(Money money) {
+    Assert.notNull(money, "Money must not be null");
     this.money = money;
   }
 }

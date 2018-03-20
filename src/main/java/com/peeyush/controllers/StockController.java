@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Stock Application main controller. Mapped to "api/" path.
+ */
 @RestController
 @RequestMapping("api/")
 public class StockController {
@@ -22,13 +25,13 @@ public class StockController {
     @Autowired
     private StockApplication stockApplication;
 
-    // List All Stocks
+    // Get All Stocks
     @RequestMapping(value = "stocks", method = RequestMethod.GET)
     public ResponseEntity<List<StockDto>> getAllStocks() {
       return stockApplication.getAllStocksResponse();
     }
 
-    // List One Stock
+    // Get One Stock
     @RequestMapping(value = "stocks/{id}", method = RequestMethod.GET)
     public ResponseEntity<StockDto> getSingleStock(@PathVariable Long id) {
       return stockApplication.getSingleStockResponse(id);
