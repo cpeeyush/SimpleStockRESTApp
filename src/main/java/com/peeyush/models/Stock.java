@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.joda.money.Money;
@@ -22,7 +23,8 @@ import org.springframework.util.Assert;
 public class Stock {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
+  @GenericGenerator(name = "native", strategy = "native")
   private Long id;
   private String name;
   @Columns(columns = { @Column(name = "currency"), @Column(name = "amount") })
