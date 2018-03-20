@@ -4,7 +4,7 @@ import com.peeyush.models.Stock;
 import com.peeyush.requests.CreateNewStockRequest;
 import com.peeyush.requests.UpdateStockRequest;
 import com.peeyush.service.StockService;
-import com.peeyush.transferObjects.StockTO;
+import com.peeyush.dataTransferObjects.StockDto;
 import com.peeyush.utils.SimpleInMemoryNumericIdGenerator;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,36 +23,37 @@ public class StockApplicationImpl implements StockApplication {
   private StockService stockService;
 
   @Override
-  public ResponseEntity<List<StockTO>> getAllStocksResponse() {
+  public ResponseEntity<List<StockDto>> getAllStocksResponse() {
     List<Stock> stockList     = stockService.getAllStocks();
-    List<StockTO> stockTOList = new ArrayList<>();
-    stockList.forEach(stock -> {stockTOList.add(new StockTO(stock));});
-    return new ResponseEntity<>(stockTOList, HttpStatus.OK);
+    List<StockDto> stockDtoList = new ArrayList<>();
+    stockList.forEach(stock -> {
+      stockDtoList.add(new StockDto(stock));});
+    return new ResponseEntity<>(stockDtoList, HttpStatus.OK);
   }
 
   @Override
-  public ResponseEntity<StockTO> getSingleStockResponse(Long id) {
+  public ResponseEntity<StockDto> getSingleStockResponse(Long id) {
     Stock stock = stockService.getSingleStock(id);
-    return new ResponseEntity<>(new StockTO(stock),HttpStatus.OK);
+    return new ResponseEntity<>(new StockDto(stock),HttpStatus.OK);
   }
 
   @Override
-  public ResponseEntity<StockTO> createNewStock(CreateNewStockRequest createNewStockRequest, HttpServletRequest request) {
+  public ResponseEntity<StockDto> createNewStock(CreateNewStockRequest createNewStockRequest, HttpServletRequest request) {
     Long stockId = SimpleInMemoryNumericIdGenerator.generateUniqueId();
     Money money  = Money.parse(createNewStockRequest.getCurrentPrice());
     Stock newStock = stockService.createNewStock(new Stock(stockId, createNewStockRequest.getName(),money));
     HttpHeaders responseHeaders = new HttpHeaders();
     responseHeaders.set("Location", stockUrlHelper(newStock, request));
-    return new ResponseEntity<>(new StockTO(newStock), responseHeaders, HttpStatus.CREATED);
+    return new ResponseEntity<>(new StockDto(newStock), responseHeaders, HttpStatus.CREATED);
   }
 
   @Override
-  public ResponseEntity<StockTO> putUpdateStock(Long id, UpdateStockRequest updateStockRequest) {
+  public ResponseEntity<StockDto> putUpdateStock(Long id, UpdateStockRequest updateStockRequest) {
     Stock existingStock = stockService.getSingleStock(id);
     Money updateMoney   = Money.parse(updateStockRequest.getCurrentPrice());
     Stock updatedStock  = new Stock(id,existingStock.getName(),updateMoney);
     updatedStock        = stockService.putUpdateStock(id,updatedStock);
-    return new ResponseEntity<>(new StockTO(updatedStock),HttpStatus.OK);
+    return new ResponseEntity<>(new StockDto(updatedStock),HttpStatus.OK);
   }
 
 

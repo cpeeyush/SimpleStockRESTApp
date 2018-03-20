@@ -1,20 +1,37 @@
 package com.peeyush.models;
 
 import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.joda.money.Money;
 import org.springframework.util.Assert;
 
 /**
  * This is Stock Entity Object.
- * Add @Entity to this class in case of JPA.
  */
+@Entity
 public class Stock {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   private String name;
+  @Embedded
   private Money money;
+  @Column(updatable = false)
+  @CreationTimestamp
+  private LocalDateTime created;
+  @UpdateTimestamp
   private LocalDateTime lastUpdate;
+
+  protected Stock() {}
 
   public Stock(Long id,String name,Money money){
     Assert.notNull(id, "Id must not be null");
@@ -36,6 +53,7 @@ public class Stock {
   }
 
   public Money getMoney() {
+
     return money;
   }
 
@@ -44,7 +62,7 @@ public class Stock {
     return lastUpdate;
   }
 
-  public void setLastUpdate(LocalDateTime lastUpdate) {
-    this.lastUpdate = lastUpdate;
+  public LocalDateTime getCreated() {
+    return created;
   }
 }

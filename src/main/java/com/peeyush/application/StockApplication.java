@@ -3,19 +3,19 @@ package com.peeyush.application;
 
 import com.peeyush.requests.CreateNewStockRequest;
 import com.peeyush.requests.UpdateStockRequest;
-import com.peeyush.transferObjects.StockTO;
+import com.peeyush.dataTransferObjects.StockDto;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 
 public interface StockApplication {
 
-  public ResponseEntity<List<StockTO>> getAllStocksResponse();
+  public ResponseEntity<List<StockDto>> getAllStocksResponse();
 
-  public ResponseEntity<StockTO> getSingleStockResponse(Long id);
+  public ResponseEntity<StockDto> getSingleStockResponse(Long id);
 
-  public ResponseEntity<StockTO> createNewStock(CreateNewStockRequest createNewStockRequest, HttpServletRequest request);
+  public ResponseEntity<StockDto> createNewStock(CreateNewStockRequest createNewStockRequest, HttpServletRequest request);
 
-  public ResponseEntity<StockTO> putUpdateStock(Long id, UpdateStockRequest updateStockRequest);
+  public ResponseEntity<StockDto> putUpdateStock(Long id, UpdateStockRequest updateStockRequest);
 
 }

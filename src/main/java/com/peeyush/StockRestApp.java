@@ -8,6 +8,7 @@ public class StockRestApp
 {
     public static void main( String[] args )
     {
+
       SpringApplication.run(StockRestApp.class, args);
     }
 }

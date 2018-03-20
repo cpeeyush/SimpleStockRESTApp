@@ -3,11 +3,10 @@ package com.peeyush.controllers;
 import com.peeyush.application.StockApplication;
 import com.peeyush.requests.CreateNewStockRequest;
 import com.peeyush.requests.UpdateStockRequest;
-import com.peeyush.transferObjects.StockTO;
+import com.peeyush.dataTransferObjects.StockDto;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import org.joda.money.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,25 +24,25 @@ public class StockController {
 
     // List All Stocks
     @RequestMapping(value = "stocks", method = RequestMethod.GET)
-    public ResponseEntity<List<StockTO>> getAllStocks() {
+    public ResponseEntity<List<StockDto>> getAllStocks() {
       return stockApplication.getAllStocksResponse();
     }
 
     // List One Stock
     @RequestMapping(value = "stocks/{id}", method = RequestMethod.GET)
-    public ResponseEntity<StockTO> getSingleStock(@PathVariable Long id) {
+    public ResponseEntity<StockDto> getSingleStock(@PathVariable Long id) {
       return stockApplication.getSingleStockResponse(id);
     }
 
     // Create A New Stock
     @RequestMapping(value = "stocks", method = RequestMethod.POST)
-    public ResponseEntity<StockTO> createNewStock(@Valid @RequestBody CreateNewStockRequest createNewStockRequest, HttpServletRequest req) {
+    public ResponseEntity<StockDto> createNewStock(@Valid @RequestBody CreateNewStockRequest createNewStockRequest, HttpServletRequest req) {
       return stockApplication.createNewStock(createNewStockRequest, req);
     }
 
     // Update A Stock with PUT
     @RequestMapping(value = "stocks/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<StockTO> putUpdateStock(@PathVariable Long id, @Valid @RequestBody UpdateStockRequest updateStockRequest) {
+    public ResponseEntity<StockDto> putUpdateStock(@PathVariable Long id, @Valid @RequestBody UpdateStockRequest updateStockRequest) {
       return stockApplication.putUpdateStock(id,updateStockRequest);
     }
 
