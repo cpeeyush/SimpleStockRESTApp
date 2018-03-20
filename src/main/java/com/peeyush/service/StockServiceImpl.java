@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,10 +34,10 @@ public class StockServiceImpl implements StockService {
 
   @Override
   public Stock createNewStock(Stock stock) {
-    if(null != stock.getId() && !StringUtils.isBlank(stock.getName()) && null != stock.getMoney()) {
+    if(!StringUtils.isBlank(stock.getName()) && null != stock.getMoney()) {
       return createStockIfNotAlreadyExists(stock);
     } else {
-      throw new StockMissingInformationException("You must include stock Id,Name & Price");
+      throw new StockMissingInformationException("You must include stock Name & Current Price");
     }
   }
 
@@ -46,14 +45,11 @@ public class StockServiceImpl implements StockService {
   public Stock putUpdateStock(Long id, Stock stockUpdates) {
     Stock existingStock = findStockIfExists(id);
 
-    if(existingStock.getId().equals(stockUpdates.getId())
-        && null != stockUpdates.getId()
-        && !StringUtils.isBlank(stockUpdates.getName())
-        && null != stockUpdates.getMoney()) {
-
-      return stockRepository.save(stockUpdates);
+    if(!StringUtils.isBlank(stockUpdates.getName()) && null != stockUpdates.getMoney()) {
+      existingStock.setMoney(stockUpdates.getMoney());
+      return stockRepository.save(existingStock);
     }else {
-      throw new StockMissingInformationException("You must include stock Id,Name & Price");
+      throw new StockMissingInformationException("You must include stock Name & Current Price");
     }
   }
 

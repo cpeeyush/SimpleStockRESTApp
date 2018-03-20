@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface StockRepository extends CrudRepository<Stock,Long>{
 
   /**
-   * Get a stock by it's name.
+   * Get a stock by it's name with case insensitive comparision.
    * @param name
    * @return Stock Object.
    */

@@ -5,7 +5,6 @@ import com.peeyush.requests.CreateNewStockRequest;
 import com.peeyush.requests.UpdateStockRequest;
 import com.peeyush.service.StockService;
 import com.peeyush.dataTransferObjects.StockDto;
-import com.peeyush.utils.SimpleInMemoryNumericIdGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -39,9 +38,8 @@ public class StockApplicationImpl implements StockApplication {
 
   @Override
   public ResponseEntity<StockDto> createNewStock(CreateNewStockRequest createNewStockRequest, HttpServletRequest request) {
-    Long stockId = SimpleInMemoryNumericIdGenerator.generateUniqueId();
-    Money money  = Money.parse(createNewStockRequest.getCurrentPrice());
-    Stock newStock = stockService.createNewStock(new Stock(stockId, createNewStockRequest.getName(),money));
+    Money money    = Money.parse(createNewStockRequest.getCurrentPrice());
+    Stock newStock = stockService.createNewStock(new Stock(createNewStockRequest.getName(),money));
     HttpHeaders responseHeaders = new HttpHeaders();
     responseHeaders.set("Location", stockUrlHelper(newStock, request));
     return new ResponseEntity<>(new StockDto(newStock), responseHeaders, HttpStatus.CREATED);
@@ -51,7 +49,7 @@ public class StockApplicationImpl implements StockApplication {
   public ResponseEntity<StockDto> putUpdateStock(Long id, UpdateStockRequest updateStockRequest) {
     Stock existingStock = stockService.getSingleStock(id);
     Money updateMoney   = Money.parse(updateStockRequest.getCurrentPrice());
-    Stock updatedStock  = new Stock(id,existingStock.getName(),updateMoney);
+    Stock updatedStock  = new Stock(existingStock.getName(),updateMoney);
     updatedStock        = stockService.putUpdateStock(id,updatedStock);
     return new ResponseEntity<>(new StockDto(updatedStock),HttpStatus.OK);
   }

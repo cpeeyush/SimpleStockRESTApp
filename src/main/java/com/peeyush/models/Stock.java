@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.joda.money.Money;
 import org.springframework.util.Assert;
@@ -23,7 +25,8 @@ public class Stock {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   private String name;
-  @Embedded
+  @Columns(columns = { @Column(name = "currency"), @Column(name = "amount") })
+  @Type(type = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyAmountAndCurrency")
   private Money money;
   @Column(updatable = false)
   @CreationTimestamp
@@ -33,11 +36,9 @@ public class Stock {
 
   protected Stock() {}
 
-  public Stock(Long id,String name,Money money){
-    Assert.notNull(id, "Id must not be null");
+  public Stock(String name,Money money){
     Assert.notNull(name, "Name must not be null");
     Assert.notNull(money, "Money must not be null");
-    this.id           = id;
     this.name         = StringUtils.trim(name);
     this.money        = money;
   }
@@ -64,5 +65,13 @@ public class Stock {
 
   public LocalDateTime getCreated() {
     return created;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setMoney(Money money) {
+    this.money = money;
   }
 }
