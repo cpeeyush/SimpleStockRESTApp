@@ -1,4 +1,4 @@
-package com.peeyush.application;
+package com.peeyush.applications;
 
 
 import com.peeyush.requests.CreateNewStockRequest;

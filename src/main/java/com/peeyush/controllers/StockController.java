@@ -1,6 +1,6 @@
 package com.peeyush.controllers;
 
-import com.peeyush.application.StockApplication;
+import com.peeyush.applications.StockApplication;
 import com.peeyush.requests.CreateNewStockRequest;
 import com.peeyush.requests.UpdateStockRequest;
 import com.peeyush.dataTransferObjects.StockDto;

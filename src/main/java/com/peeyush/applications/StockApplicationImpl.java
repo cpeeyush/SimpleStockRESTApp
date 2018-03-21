@@ -1,4 +1,4 @@
-package com.peeyush.application;
+package com.peeyush.applications;
 
 import com.peeyush.models.Stock;
 import com.peeyush.requests.CreateNewStockRequest;
@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 /**
- * Implementation of StockApplication interface. See baseclass for more information.
+ * Implementation of StockApplication interface. See base class for more information.
  */
 @Component
 public class StockApplicationImpl implements StockApplication {
