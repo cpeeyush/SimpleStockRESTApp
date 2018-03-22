@@ -5,6 +5,7 @@ package com.peeyush.applications;
 import com.peeyush.dataTransferObjects.StockDto;
 import com.peeyush.models.Stock;
 import com.peeyush.requests.CreateNewStockRequest;
+import com.peeyush.requests.UpdateStockRequest;
 import com.peeyush.service.StockService;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,8 @@ public class StockApplicationImplTest {
     @MockBean
     private CreateNewStockRequest createNewStockRequest;
     @MockBean
+    private UpdateStockRequest updateStockRequest;
+    @MockBean
     private HttpServletRequest request;
 
     @Test
@@ -57,10 +60,10 @@ public class StockApplicationImplTest {
       //when
       ResponseEntity<List<StockDto>> responseEntity = stockApplication.getAllStocksResponse();
       //then
-      Assert.assertEquals(responseEntity.getBody().size(),stockList.size());
-      Assert.assertEquals(responseEntity.getBody().get(0).getName(),stockList.get(0).getName());
-      Assert.assertEquals(responseEntity.getBody().get(1).getName(),stockList.get(1).getName());
-      Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+      Assert.assertEquals(stockList.size(),responseEntity.getBody().size());
+      Assert.assertEquals(stockList.get(0).getName(),responseEntity.getBody().get(0).getName());
+      Assert.assertEquals(stockList.get(1).getName(),responseEntity.getBody().get(1).getName());
+      Assert.assertEquals(HttpStatus.OK,responseEntity.getStatusCode());
       Mockito.verify(stockService,Mockito.times(1)).getAllStocks();
     }
 
@@ -73,14 +76,14 @@ public class StockApplicationImplTest {
       //when
       ResponseEntity<StockDto> responseEntity = stockApplication.getSingleStockResponse((long)122);
       //then
-      Assert.assertEquals(responseEntity.getBody().getName(),stock1.getName());
-      Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+      Assert.assertEquals(stock1.getName(),responseEntity.getBody().getName());
+      Assert.assertEquals(HttpStatus.OK,responseEntity.getStatusCode());
       Mockito.verify(stockService,Mockito.times(1)).getSingleStock((long)122);
     }
 
     @Test
     public void whenCreateNewStock_thenReturnNewlyCreatedStock(){
-      //give
+      //given
       Money money    = Money.parse("USD 23.47");
       Stock newStock = new Stock("APPLE",money);
       Mockito.when(createNewStockRequest.getCurrentPrice()).thenReturn("USD 23.47");
@@ -89,10 +92,11 @@ public class StockApplicationImplTest {
       Mockito.when(request.getRequestURL()).thenReturn(new StringBuffer("http://localhost"));
       //when
       ResponseEntity<StockDto> responseEntity = stockApplication.createNewStock(createNewStockRequest,request);
-      Assert.assertEquals(responseEntity.getStatusCode(),HttpStatus.CREATED);
-      Assert.assertEquals(responseEntity.getBody().getName(),"APPLE");
-      Assert.assertEquals(responseEntity.getBody().getCurrentPrice(),"USD 23.47");
-      Assert.assertEquals(responseEntity.getHeaders().getLocation().getHost(),"localhost");
+      //then
+      Assert.assertEquals(HttpStatus.CREATED,responseEntity.getStatusCode());
+      Assert.assertEquals("APPLE",responseEntity.getBody().getName());
+      Assert.assertEquals("USD 23.47",responseEntity.getBody().getCurrentPrice());
+      Assert.assertEquals("localhost",responseEntity.getHeaders().getLocation().getHost());
       Mockito.verify(createNewStockRequest,Mockito.times(1)).getCurrentPrice();
       Mockito.verify(createNewStockRequest,Mockito.times(1)).getName();
       Mockito.verify(request,Mockito.times(1)).getRequestURL();
@@ -100,6 +104,21 @@ public class StockApplicationImplTest {
 
     @Test
     public void whenPutUpdateStock_thenReturnUpdatedStock(){
-
+      //given
+      Money money        = Money.parse("USD 23.47");
+      Stock stock        = new Stock("APPLE",money);
+      Money updatedMoney = Money.parse("USD 29.30");
+      Stock updatedStock = new Stock("APPLE",updatedMoney);
+      Mockito.when(stockService.getSingleStock(MockitoHamcrest.longThat(Matchers.any(Long.class)))).thenReturn(stock);
+      Mockito.when(updateStockRequest.getCurrentPrice()).thenReturn("USD 29.30");
+      Mockito.when(stockService.putUpdateStock(MockitoHamcrest.longThat(Matchers.any(Long.class)),
+          MockitoHamcrest.argThat(Matchers.any(Stock.class)))).thenReturn(updatedStock);
+      //when
+      ResponseEntity<StockDto> responseEntity = stockApplication.putUpdateStock((long)122,updateStockRequest);
+      //then
+      Assert.assertEquals(HttpStatus.OK,responseEntity.getStatusCode());
+      Assert.assertEquals("USD 29.30",responseEntity.getBody().getCurrentPrice());
+      Assert.assertEquals("APPLE",responseEntity.getBody().getName());
+      Mockito.verify(updateStockRequest,Mockito.times(1)).getCurrentPrice();
     }
 }
