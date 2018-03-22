@@ -27,13 +27,11 @@ public class StockDto implements Serializable{
       Assert.notNull(stock ,"Stock should not be null");
       this.id           = stock.getId();
       this.name         = stock.getName();
-      this.currentPrice = stock.getMoney().getCurrencyUnit() + " " +stock.getMoney().getAmount();
+      this.currentPrice = stock.getMoney().getCurrencyUnit().getCurrencyCode() + " " +stock.getMoney().getAmount();
       this.lastUpdate   = stock.getLastUpdate();
   }
 
-  public Long getId() {
-    return id;
-  }
+  public Long getId() { return id; }
 
   public void setId(Long id) {
     this.id = id;
