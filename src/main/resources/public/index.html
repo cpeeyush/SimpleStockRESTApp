@@ -4,6 +4,30 @@
   <title>Simple Stock REST App</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="js/stockApp.js"></script>
+  <style>
+#stockDataTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#stockDataTable td, #stockDataTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#stockDataTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#stockDataTable tr:hover {background-color: #ddd;}
+
+#stockDataTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
 </head>
 
 <body>

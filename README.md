@@ -14,6 +14,19 @@ To see the list of available stock, just run the application and open following 
 **Minimum System Requirements to run the project**
 
       * Java 8
+      
+**How to run application ?**
+
+    1. Use Precompiled Jar
+      - Dowload from here & simply run with java -jar <filename>
+      
+    2. Build from source
+      - Install & Setup Maven.
+      - Clone this project.
+      - Go to root folder.
+      - Fire command "mvn clean package"
+      - It will run all the unit tests,compile the code & generate the final jar under the target folder there.
+      - Run generated jar from the last step. java -jar target/SimpleStockRESTApp-1.0-SNAPSHOT.jar
   
   
 **REST endpoints details:**

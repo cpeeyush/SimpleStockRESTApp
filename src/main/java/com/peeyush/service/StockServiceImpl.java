@@ -31,12 +31,15 @@ public class StockServiceImpl implements StockService {
 
   @Override
   public Stock getSingleStock(Long id) {
+    if(null == id){
+      throw new StockNotFoundException("Stock Not Found");
+    }
     return findStockIfExists(id);
   }
 
   @Override
   public Stock createNewStock(Stock stock) {
-    if(!StringUtils.isBlank(stock.getName()) && null != stock.getMoney()) {
+    if(null != stock && !StringUtils.isBlank(stock.getName()) && null != stock.getMoney()) {
       return createStockIfNotAlreadyExists(stock);
     } else {
       throw new StockMissingInformationException("You must include stock Name & Current Price");
@@ -45,9 +48,12 @@ public class StockServiceImpl implements StockService {
 
   @Override
   public Stock putUpdateStock(Long id, Stock stockUpdates) {
+    if(null == id){
+      throw new StockNotFoundException("Stock Not Found");
+    }
     Stock existingStock = findStockIfExists(id);
 
-    if(!StringUtils.isBlank(stockUpdates.getName()) && null != stockUpdates.getMoney()) {
+    if(null != stockUpdates && !StringUtils.isBlank(stockUpdates.getName()) && null != stockUpdates.getMoney()) {
       existingStock.setMoney(stockUpdates.getMoney());
       return stockRepository.save(existingStock);
     }else {
