@@ -3,7 +3,7 @@
 
 This application exposes four REST endpoint by which we can manage the stock items. All operation are happening in memory.
 
-To see the list of available stock, just run the application and open following link http://127.0.0.1:8080/ in your browser.
+**Simple Front End:** To see the list of available stock, just run the application and open following link http://127.0.0.1:8080/ in your browser.
 
 **Stack Details:**
 
@@ -28,7 +28,12 @@ To see the list of available stock, just run the application and open following 
       - It will run all the unit tests,compile the code & generate the final jar under the target folder there.
       - Run generated jar from the last step. java -jar target/SimpleStockRESTApp-1.0-SNAPSHOT.jar
   
+
+**API Documentation via Swagger**
   
+  To see the API documentation & for trying out the api call. Please run the application and go to the following page.
+  - Swagger UI : http://127.0.0.1:8080/swagger-ui.html
+    
 **REST endpoints details:**
 
   1. Get All stocks.
