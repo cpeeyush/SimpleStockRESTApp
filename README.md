@@ -20,7 +20,7 @@ This application exposes four REST endpoint by which we can manage the stock ite
 **How to run application ?**
 
     1. Use Precompiled Jar
-      - Dowload from here & simply run with java -jar <filename>
+      - Download from here(https://drive.google.com/open?id=1Jmz-cnuDp3wI9WOvbmnov4YSrhpcu4jY) & simply run with java -jar <filename>
       
     2. Build from source
       - Install & Setup Maven.
