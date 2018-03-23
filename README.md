@@ -3,17 +3,19 @@
 
 This application exposes four REST endpoint by which we can manage the stock items. All operation are happening in memory.
 
-**Simple Front End:** To see the list of available stock, just run the application and open following link http://127.0.0.1:8080/ in your browser.
+**Simple Front End:** 
+
+      -To see the list of available stock, just run the application and open following link http://127.0.0.1:8080/ in your browser.
 
 **Stack Details:**
 
-      * Maven as a build tool.
-      * Spring Boot as a framework.
-      * H2 as the in memory database.
+      - Maven as a build tool.
+      - Spring Boot as a framework.
+      - H2 as the in memory database.
 
 **Minimum System Requirements to run the project**
 
-      * Java 8
+      - Java 8
       
 **How to run application ?**
 
@@ -31,8 +33,10 @@ This application exposes four REST endpoint by which we can manage the stock ite
 
 **API Documentation via Swagger**
   
-  To see the API documentation & for trying out the api call. Please run the application and go to the following page.
-  - Swagger UI : http://127.0.0.1:8080/swagger-ui.html
+    To see the API documentation & for trying out the api call. Please run the application and go to the following page.
+      - Swagger UI : http://127.0.0.1:8080/swagger-ui.html
+    
+    
     
 **REST endpoints details:**
 
